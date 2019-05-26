@@ -1,0 +1,17 @@
+.to-do-list-container {
+  max-width: 500px;
+  margin: 0 auto;
+  .to-do-list {
+    display: flex;
+    .list, .details {
+      width: 50%;
+    }
+    .completed {
+      text-decoration-line: line-through;
+      font-style: italic;
+      color: #777;
+      pointer-events: none;
+    }
+  }
+}
+

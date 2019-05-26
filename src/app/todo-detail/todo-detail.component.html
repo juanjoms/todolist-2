@@ -1,0 +1,24 @@
+<div class="todo-detail" *ngIf="todo">
+  <p class="no-top-margin">
+    <input type="text" class="big-input" [(ngModel)]="todo.title">
+  </p>
+  <p>
+    <label>
+      Due date:
+      <input type="text" [(ngModel)]="todo.dueDate" placeholder="MM/DD/YYYY" >
+    </label>
+  </p>
+  <div>
+    <span><b>Subtasks:</b></span>
+    <ul>
+      <li *ngFor="let subtask of todo.subtasks">{{ subtask }}</li>
+    </ul>
+    <form>
+      <input type="text" [(ngModel)]="newSubtask" name="newSubtask" placeholder="Subtask description">
+      <button (click)="addSubtask()">Add subtask</button>
+    </form>
+  </div>
+  <p>
+    <button (click)="onRemove()">Remove</button>
+  </p>
+</div>

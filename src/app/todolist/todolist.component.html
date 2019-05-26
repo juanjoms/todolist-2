@@ -1,0 +1,43 @@
+<div class="to-do-list-container">
+  <form>
+    <input type="text" class="todo-input" [(ngModel)]="newToDo.title" name="newToDo">
+    <button type="submit" (click)="addToDo()">Add To Do</button>
+  </form>
+  <hr>
+  <div class="to-do-list">
+    <div class="list">
+      <div *ngFor="let todo of todoList">
+        <input type="checkbox" [checked]="todo.isCompleted" (change)="onToDoChange(todo)">
+        <a
+          href="javascript:void(0)"
+          (click)="showToDoDetails(todo)"
+          [ngClass]="{'completed': todo.isCompleted}">
+          {{ todo.title }}
+          <sub *ngIf="todo.dueDate">{{todo.dueDate}}</sub>
+        </a>
+        <button (click)="removeToDo(todo)"> &#10005;</button>
+      </div>
+    </div>
+
+    <div class="details" *ngIf="selectedToDo">
+      <p class="no-top-margin">
+        <input type="text" class="big-input" [(ngModel)]="selectedToDo.title">
+      </p>
+      <p>
+        <label>
+          Due date:
+          <input type="text" [(ngModel)]="selectedToDo.dueDate" placeholder="MM/DD/YYYY" >
+        </label>
+      </p>
+      <div>
+        <span><b>Subtasks:</b></span>
+        <input type="text" placeholder="Enter subtaks"> <button>Add subtaks</button>
+        <ul>
+          <li *ngFor="let subtask of selectedToDo.subtasks">{{ subtask }}</li>
+        </ul>
+      </div>
+      <button (click)="onRemove()">Remove</button>
+    </div>
+
+  </div>
+</div>
