@@ -15,6 +15,9 @@ export class TodolistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.todoList = this.getTodoList() || [];
+    if (this.todoList.length) {
+      this.selectedToDo = this.todoList[0];
+    }
     this.newToDo = new ToDo();
     window.onbeforeunload = () => this.saveTodoList();
   }
@@ -29,6 +32,7 @@ export class TodolistComponent implements OnInit, OnDestroy {
       return;
     }
     this.todoList.push(this.newToDo);
+    this.selectedToDo = this.newToDo;
     this.newToDo = new ToDo();
     this.getElem('.todo-input').focus();
   }
@@ -40,7 +44,9 @@ export class TodolistComponent implements OnInit, OnDestroy {
   }
 
   onToDoChange(todo: ToDo) {
-    todo.isCompleted = !todo.isCompleted;
+    if (todo.isCompleted && todo === this.selectedToDo) {
+      this.selectedToDo = null;
+    }
   }
 
   showToDoDetails(todo: ToDo) {

@@ -1,16 +1,36 @@
 .to-do-list-container {
-  max-width: 500px;
+  max-width: 650px;
   margin: 0 auto;
+  .new-todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    .field-new-todo {
+      width: 70%;
+    }
+    .button-new-todo {
+      width: 25%;
+    }
+  }
   .to-do-list {
     display: flex;
     .list, .details {
       width: 50%;
     }
-    .completed {
-      text-decoration-line: line-through;
-      font-style: italic;
-      color: #777;
-      pointer-events: none;
+    .list {
+      .list-item {
+        display: flex;
+        align-items: center;
+        .list-item-button {
+          height: 60px;
+          &.completed {
+            text-decoration-line: line-through;
+            font-style: italic;
+            color: #777;
+            pointer-events: none;
+          }
+        }
+      }
     }
   }
 }
