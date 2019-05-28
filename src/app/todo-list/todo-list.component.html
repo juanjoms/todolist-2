@@ -1,21 +1,23 @@
 <div class="to-do-list-container">
-  <form>
-    <input type="text" class="todo-input" [(ngModel)]="newToDo.title" name="newToDo">
-    <button type="submit" (click)="addToDo()">Add To Do</button>
+  <form class="add-todo-form">
+    <mat-form-field class="input-add-todo">
+      <input matInput placeholder="Favorite food" class="todo-input" [(ngModel)]="newToDo.title"  name="newToDo"  value="Sushi">
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="button-add-todo" type="submit" (click)="addToDo()">ADD TO DO</button>
   </form>
-  <hr>
   <div class="to-do-list">
     <div class="list">
-      <div *ngFor="let todo of todoList">
-        <input type="checkbox" [checked]="todo.isCompleted">
-        <a
-          href="javascript:void(0)"
-          (click)="showToDoDetails(todo)"
-          [ngClass]="{'completed': todo.isCompleted}">
-          {{ todo.title }} ›
-          <sub *ngIf="todo.dueDate">{{todo.dueDate}}</sub>
-        </a>
-      </div>
+
+      <mat-action-list>
+        <div *ngFor="let todo of todoList" class="todo-item-container">
+          <mat-checkbox [(ngModel)]="todo.isCompleted" (change)="onChange(todo)" ></mat-checkbox>
+          <button mat-list-item (click)="showToDoDetails(todo)" [ngClass]="{'completed': todo.isCompleted}"
+          class="todo-item">
+            <h4 mat-line>{{ todo.title }}</h4>
+            <p mat-line> {{todo.dueDate | date}} </p>
+          </button>
+        </div>
+      </mat-action-list>
     </div>
     <div class="details" *ngIf="selectedToDo" >
       <app-todo-detail [todo]="selectedToDo" (removed)="removeToDo($event)" ></app-todo-detail>

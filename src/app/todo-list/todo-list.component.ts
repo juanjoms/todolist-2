@@ -13,13 +13,18 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.todoList = this.getTodoList() || [];
+    if (this.todoList.length) {
+      this.selectedToDo = this.todoList[0];
+    }
     this.newToDo = new ToDo();
     window.onbeforeunload = () => this.saveTodoList();
   }
-  ngOnDestroy(): void {
-    console.log('hi');
-    throw new Error('Method not implemented.');
+
+  onChange(todo) {
+    this.selectedToDo = null;
   }
+
+
   addToDo() {
     if (!this.newToDo.title) {
       return;

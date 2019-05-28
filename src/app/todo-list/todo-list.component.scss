@@ -1,11 +1,35 @@
 .to-do-list-container {
   max-width: 500px;
   margin: 0 auto;
+  .add-todo-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .input-add-todo {
+      width: 72%;
+    }
+    .button-add-todo {
+      width: 22%;
+    }
+  }
+  .full-width {
+    width: 60%;
+  }
   .to-do-list {
     display: flex;
     .list,
     .details {
       width: 50%;
+    }
+    .list {
+      .todo-item-container {
+        display: flex;
+        align-items: center;
+        .todo-item {
+          height: 50px;
+        }
+      }
+
     }
     .completed {
       text-decoration-line: line-through;

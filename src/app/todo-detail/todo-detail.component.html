@@ -1,24 +1,34 @@
 <div class="todo-detail" *ngIf="todo">
   <p class="no-top-margin">
-    <input type="text" class="big-input" [(ngModel)]="todo.title">
+    <mat-form-field class="example-full-width">
+      <input matInput class="big-input" [(ngModel)]="todo.title">
+    </mat-form-field>
   </p>
   <p>
-    <label>
-      Due date:
-      <input type="text" [(ngModel)]="todo.dueDate" placeholder="MM/DD/YYYY" >
-    </label>
+    <mat-form-field>
+      <input (focus)="picker.open()" matInput [matDatepicker]="picker"  [(ngModel)]="todo.dueDate"  placeholder="Due date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </p>
-  <div>
-    <span><b>Subtasks:</b></span>
-    <ul>
-      <li *ngFor="let subtask of todo.subtasks">{{ subtask }}</li>
-    </ul>
-    <form>
-      <input type="text" [(ngModel)]="newSubtask" name="newSubtask" placeholder="Subtask description">
-      <button (click)="addSubtask()">Add subtask</button>
-    </form>
-  </div>
+
+<mat-form-field class="example-chip-list">
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let subtask of todo.subtasks" [selectable]="true"
+             [removable]="true" (removed)="remove(subtask)">
+      {{subtask}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input placeholder="New subtask..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="true"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+</mat-form-field>
+
+
   <p>
-    <button (click)="onRemove()">Remove</button>
+    <button mat-flat-button color="accent" (click)="onRemove()">Remove</button>
   </p>
 </div>
