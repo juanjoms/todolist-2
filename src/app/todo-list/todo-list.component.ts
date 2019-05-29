@@ -1,11 +1,11 @@
-import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ToDo } from '../models/to-do';
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit, OnDestroy {
+export class TodoListComponent implements OnInit {
   todoList: ToDo[];
   newToDo: ToDo;
   selectedToDo: ToDo;
